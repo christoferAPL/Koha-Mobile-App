@@ -1,0 +1,38 @@
+Version 1.4.0 (Apple), 7 (Android) -> Start September 20, published November 23, 2020
+- Upgraded expo-cli from 3.21.5 to 3.28.5 <npm i -g expo-cli>
+- upgraded from SDK 37 to SDK 39 (Addresses the Android error) ... <expo upgrade>
+- installed react-native-barcode-expo to return card functionality
+- removed accordion list type items 
+- streamlined and refactored search code at the PHP level. no longer show items that are without a barcode or are REFERENCE. Dramatically improved search result speed
+- removed StaffPicks code from the app
+- added 'More' option from the menu, along with a number of submenu options to add functionality
+- added barcode to the top of the Accounts page for troubleshooting.
+- removed a number of orphaned CSS classes (barcodeDetails, clearText, contactInfo, headerStyle, includeClearButton, pickerStyle, pickerView, renewBtnFormat, statusBar, specialNews)
+- added clear text functionality to search bar
+
+
+
+Version 1.3.0 (Apple), 6 (Android) -> August 7, 2020
+-- hid the scrollbar on the search page
+-- hid the pickup location for downloadable materials
+-- enhanced the account information page to include items checked out and holds
+-- enhanced the search functionality by using a plugin rather than a Koha report (reflected in php code)
+-- removed some of the search filters in place to handle the limiting of results ... will look to put back in future versions
+
+
+Version 1.2.0 (Apple), 5 (Android) -> July 6, 2020
+-- changed login form to keep username persistant on logout. added clear form button functionality.
+-- removed the base report discovery layer and replaced it with a true discovery layer
+-- added movie cover art to search results.
+
+
+Version 1.1.0 (Apple), 4 (Android) -> June 4, 2020
+-- changed the select boxes from react-native-picker to react-native-picker-select. This change was strictly for IOS, but did bring the android and IOS experiences closer
+-- changed the messaging on successful or unsuccessful ILS interactions. Alisha made this request, and it ensures that the error messaging looks uniform to the rest of the app.
+-- upgraded to version of expo-cli from 3.20.9 to 3.21.5
+-- removed the individual build version in Apple, but can't in Android
+
+< 1.1.0 -> June 1, 2020
+-- base version with small updates to make functionality work
+-- unable to test IOS during build, so needed to launch and correct on the fly
+-- upgrade needed to SDK 37 in order to publish to Apple store
