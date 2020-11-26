@@ -1,0 +1,8 @@
+The following files require editing:
+
+- config.php: for the SIP connection information
+- searchResultz.php: for catalogue pointers and clean up my iTypes/cCodes for yours
+- searchLists.php: add your own list titles and report numbers
+- placehold.php: input your own locations
+- discovery.php: for catalogue pointers
+- moreDetails.php: your library specific information
