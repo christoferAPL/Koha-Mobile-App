@@ -28,6 +28,7 @@ I would like to thank the following people, without their help and guidance this
 - Nick Clemens (ByWater Solutions) for the running start he gave me in usign the Plugin, along with "I wouldn't do that if I were you" advice.
 - Kyle Hall (ByWater Solutions) for the initial kick at creating our mobile app that ultimately turned into this.
 - Rocio Dressler (ByWater Solutions) for her help creating some of the the reports that this app uses.
+- John Wohlers for his open source SIP code
 
 I'm more than happy to help with any questions.
 
