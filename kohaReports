@@ -1,0 +1,72 @@
+For Discovery, itype and location:
+
+SELECT 
+  CONCAT(biblio.title, ' ', ExtractValue(( SELECT metadata FROM biblio_metadata WHERE biblio.biblionumber = biblio_metadata.biblionumber), '//datafield[@tag="245"]/subfield[@code="b"]')) AS Title, 
+  IFNULL(biblio.author, '') AS Author,
+  biblioitems.isbn AS ISBN,
+  CONCAT(itemtypes.description, ' - ', authorised_values.lib) AS Item,
+  items.barcode AS Barcode,
+  biblio.abstract AS Abstract,
+  SUBSTRING_INDEX(biblioitems.url, '|', 1) AS DownloadURL
+FROM items
+LEFT JOIN biblio USING (biblionumber)
+INNER JOIN biblioitems USING (biblionumber)
+INNER JOIN itemtypes ON items.itype = itemtypes.itemtype
+INNER JOIN authorised_values ON (items.ccode=authorised_values.authorised_value) 
+WHERE 
+  items.itype = <<itemtype>>
+  AND items.location = <<ccode>>
+GROUP BY biblio.biblionumber
+ORDER BY items.dateaccessioned DESC
+LIMIT 30
+
+
+
+For Discovery, itype and ccode:
+
+SELECT 
+  CONCAT(biblio.title, ' ', ExtractValue(( SELECT metadata FROM biblio_metadata WHERE biblio.biblionumber = biblio_metadata.biblionumber), '//datafield[@tag="245"]/subfield[@code="b"]')) AS Title, 
+  IFNULL(biblio.author, '') AS Author,
+  biblioitems.isbn AS ISBN,
+  CONCAT(itemtypes.description, ' - ', authorised_values.lib) AS Item,
+  items.barcode AS Barcode,
+  biblio.abstract AS Abstract,
+  SUBSTRING_INDEX(biblioitems.url, '|', 1) AS DownloadURL
+FROM items
+LEFT JOIN biblio USING (biblionumber)
+INNER JOIN biblioitems USING (biblionumber)
+INNER JOIN itemtypes ON items.itype = itemtypes.itemtype
+INNER JOIN authorised_values ON (items.ccode=authorised_values.authorised_value) 
+WHERE 
+  items.itype = <<itemtype>>
+  AND items.ccode = <<ccode>>
+  AND items.location NOT IN ('ONORDER')
+GROUP BY biblio.biblionumber
+ORDER BY items.dateaccessioned DESC
+LIMIT 30
+
+
+Example of Quick Search:
+
+SELECT 
+  CONCAT(biblio.title, ' ', ExtractValue(( SELECT metadata FROM biblio_metadata WHERE biblio.biblionumber = biblio_metadata.biblionumber), '//datafield[@tag="245"]/subfield[@code="b"]')) AS Title, 
+  IFNULL(biblio.author, '') AS Author,
+  biblioitems.isbn AS ISBN,
+  CONCAT(itemtypes.description, ' - ', authorised_values.lib) AS Item,
+  items.barcode AS Barcode,
+  items.itype AS iType,
+  items.ccode AS cCode,
+  items.location AS Location,
+  biblio.abstract AS Abstract,
+  SUBSTRING_INDEX(biblioitems.url, '|', 1) AS DownloadURL
+FROM items
+LEFT JOIN biblio USING (biblionumber)
+INNER JOIN biblioitems USING (biblionumber)
+INNER JOIN itemtypes ON items.itype = itemtypes.itemtype
+INNER JOIN authorised_values ON (items.ccode=authorised_values.authorised_value)
+INNER JOIN virtualshelfcontents USING (biblionumber)
+WHERE 
+  virtualshelfcontents.shelfnumber = 13968
+  AND items.homebranch='MAIN'
+ORDER BY biblio.datecreated DESC
+LIMIT 100
